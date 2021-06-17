@@ -23,20 +23,25 @@ namespace ApiCatalogoJogos.Controllers.V1
 
        [HttpGet]
         public async Task<ActionResult<IEnumerable<JogoViewModel>>> Obter ([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1, 50)] int quantidade = 5)
-       {
+        {
             var jogos = await _jogoService.Obter(pagina, quantidade);
 
             if(jogos.Count() == 0)
                 return NoContent();
 
             return Ok(jogos);
-       }
+        }
 
 
         [HttpGet("{idJogo:guid}")]
-        public async Task<ActionResult<JogoViewModel>> Obter(Guid idJogo)
+        public async Task<ActionResult<JogoViewModel>> Obter([FromRoute] Guid idJogo)
         {
-            return Ok();
+            var jogo = await _jogoService.Obter(idJogo);
+
+            if (jogo == null)
+                return NoContent();
+
+            return Ok(jogo);
         }
 
 
