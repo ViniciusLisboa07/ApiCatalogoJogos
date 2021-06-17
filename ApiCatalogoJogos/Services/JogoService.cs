@@ -18,14 +18,34 @@ namespace ApiCatalogoJogos.Services
             _jogoRepository = jogoRepository;
         }
 
-        public Task Atualizar(Guid id, JogoInputModel jogo)
+        
+        public async Task<List<JogoViewModel>> Obter(int pagina, int quantidade)
         {
-            throw new NotImplementedException();
+            var jogos = _jogoRepository.Obter(pagina, quantidade);
+
+            return jogos.Select(jogo => new JogoViewModel
+            {
+                Id = jogo.id,
+                Nome = jogo.Nome,
+                Preco = jogo.Preco,
+                Produtora = jogo.Produtora
+            }).ToList();
         }
 
-        public Task Atualizar(Guid id, double preco)
+        public async Task<JogoViewModel> Obter(Guid id)
         {
-            throw new NotImplementedException();
+            var jogo = await _jogoRepository.Obter(id);
+
+            if (jogo == null)
+                return null;
+
+            return  new JogoViewModel
+            {
+                id = jogo.id,
+                Nome = jogo.Nome,
+                Preco = jogo.Preco,
+                Produtora = jogo.Produtora
+            };
         }
 
         public async Task<JogoViewModel> Inserir(JogoInputModel jogo)
@@ -55,33 +75,14 @@ namespace ApiCatalogoJogos.Services
             
         }
 
-        public async Task<List<JogoViewModel>> Obter(int pagina, int quantidade)
+        public Task Atualizar(Guid id, JogoInputModel jogo)
         {
-            var jogos = _jogoRepository.Obter(pagina, quantidade);
-
-            return jogos.Select(jogo => new JogoViewModel
-            {
-                Id = jogo.id,
-                Nome = jogo.Nome,
-                Preco = jogo.Preco,
-                Produtora = jogo.Produtora
-            }).ToList();
+            throw new NotImplementedException();
         }
 
-        public Task<JogoViewModel> Obter(Guid id)
+        public Task Atualizar(Guid id, double preco)
         {
-            var jogo = _jogoRepository.Obter(id);
-
-            if (jogo == null)
-                return null;
-
-            return new JogoViewModel
-            {
-                id = jogo.Id,
-                Nome = jogo.,
-                Preco = jogo.Preco,
-                Produtora = jogo.Produtora
-            };
+            throw new NotImplementedException();
         }
 
         public Task Remover(Guid id)
@@ -92,16 +93,6 @@ namespace ApiCatalogoJogos.Services
         public void Dispose()
         {
             _jogoRepository?.Dispose();
-        }
-
-        Task<List<JogoViewModel>> IJogoService.Obter(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<JogoViewModel>> IJogoService.Inserir(JogoInputModel jogo)
-        {
-            throw new NotImplementedException();
         }
     }
 }
