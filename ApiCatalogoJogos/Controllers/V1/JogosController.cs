@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +16,20 @@ namespace ApiCatalogoJogos.Controllers.V1
     {
         private readonly IJogoService _jogoService;
 
+        public JogosController(IJogoService jogoService)
+        {
+            _jogoService = jogoService;
+        }
 
        [HttpGet]
-        public async Task<ActionResult<List<JogoViewModel>>> Obter ()
+        public async Task<ActionResult<IEnumerable<JogoViewModel>>> Obter ([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1, 50)] int quantidade = 5)
        {
-            return Ok();
+            var jogos = await _jogoService.Obter(pagina, quantidade);
+
+            if(jogos.Count() == 0)
+                return NoContent();
+
+            return Ok(jogos);
        }
 
 
