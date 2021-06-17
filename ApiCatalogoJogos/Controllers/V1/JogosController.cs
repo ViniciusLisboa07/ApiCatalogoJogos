@@ -33,13 +33,19 @@ namespace ApiCatalogoJogos.Controllers.V1
         }
 
         [HttpPut("{idJogo:guid}")]
-        public async Task<ActionResult<object>> AtualizarJogo(Guid idJogo, object jogo)
+        public async Task<ActionResult> AtualizarJogo(Guid idJogo, object jogo)
         {
             return Ok();
         }
 
         [HttpPatch("{idJogo:guid}/preco/{preco:double}")]
-        public async Task<ActionResult<object>> AtualizarJogo(Guid idJogo, object jogo)
+        public async Task<ActionResult> AtualizarJogo(Guid idJogo, double preco)
+        {
+            return Ok();
+        }
+
+        [HttpDelete("{idJogo:guid}")]
+        public async Task<AcceptedResult> DeletarJogo(Guid idJogo)
         {
             return Ok();
         }
