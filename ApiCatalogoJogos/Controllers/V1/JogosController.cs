@@ -63,21 +63,49 @@ namespace ApiCatalogoJogos.Controllers.V1
         }
 
         [HttpPut("{idJogo:guid}")]
-        public async Task<ActionResult> AtualizarJogo(Guid idJogo, object jogo)
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogoInputModel)
         {
-            return Ok();
+            try
+            {
+                await _jogoService.Atualizar(idJogo, jogoInputModel);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return NotFound("Não existe esse jogo!");
+            }
+
         }
 
         [HttpPatch("{idJogo:guid}/preco/{preco:double}")]
-        public async Task<ActionResult> AtualizarJogo(Guid idJogo, double preco)
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
         {
-            return Ok();
+            try
+            {
+                await _jogoService.Atualizar(idJogo, preco);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Não existe esse jogo!");
+            }
         }
 
         [HttpDelete("{idJogo:guid}")]
-        public async Task<AcceptedResult> DeletarJogo(Guid idJogo)
+        public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
         {
-            return Ok();
+            try
+            {
+                await _jogoService.Remover(idJogo);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Não existe esse jogo!");
+            }
         }
     }
 }
