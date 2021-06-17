@@ -1,4 +1,5 @@
-﻿using ApiCatalogoJogos.Services;
+﻿using ApiCatalogoJogos.InputModel;
+using ApiCatalogoJogos.Services;
 using ApiCatalogoJogos.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,10 +47,19 @@ namespace ApiCatalogoJogos.Controllers.V1
 
 
         [HttpPost]
-        public async Task<ActionResult<JogoViewModel>> InserirJogo(object jogo)
+        public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
+            try
+            {
+                var jogo = _jogoService.Inserir(jogoInputModel);
 
-            return Ok();
+                return Ok(jogo);
+            }
+            catch(Exception ex)
+            {
+                return UnprocessableEntity("Já existe um jogo cadastrado com esse nome para esta produtora!");
+            }
+
         }
 
         [HttpPut("{idJogo:guid}")]
