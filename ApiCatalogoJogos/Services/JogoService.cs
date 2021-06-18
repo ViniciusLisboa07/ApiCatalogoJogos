@@ -75,19 +75,40 @@ namespace ApiCatalogoJogos.Services
             
         }
 
-        public Task Atualizar(Guid id, JogoInputModel jogo)
+        public async Task Atualizar(Guid id, JogoInputModel jogo)
         {
-            throw new NotImplementedException();
+            var entidadeJogo = await _jogoRepository.Obter(id);
+
+            if (entidadeJogo == null)
+                throw new JogoNaoCadastradoException();
+
+            entidadeJogo.Preco = jogo.Preco;
+            entidadeJogo.Produtora = jogo.Produtora;
+            entidadeJogo.Nome = jogo.Nome;
+
+            await _jogoRepository.Atualizar(id, entidadeJogo);
         }
 
-        public Task Atualizar(Guid id, double preco)
+        public async Task Atualizar(Guid id, double preco)
         {
-            throw new NotImplementedException();
+            var entidadeJogo = await _jogoRepository.Obter(id);
+
+            if (entidadeJogo == null)
+                throw new JogoNaoCadastradoException();
+
+            entidadeJogo.Preco = preco;
+
+            await _jogoRepository.Atualizar(id, entidadeJogo);
         }
 
-        public Task Remover(Guid id)
+        public async Task Remover(Guid id)
         {
-            throw new NotImplementedException();
+            var jogo = _jogoRepository.Obter(id);
+
+            if (jogo == null)
+                throw new JogoNaoCadastradoException();
+
+            await _jogoRepository.Remover(id);
         }
 
         public void Dispose()
