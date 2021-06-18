@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ApiCatalagoJogos.Exceptions 
 {
-    public class JogoCadastradoExeption : Exception
+    public class JogoJaCadastradoException : Exception
     {
-        public JogoCadastradoExeption()
+        public JogoJaCadastradoException()
             : base("Este jogo já está cadastrado!")
         { }
     }

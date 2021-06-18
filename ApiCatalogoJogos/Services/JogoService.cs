@@ -1,4 +1,6 @@
-﻿using ApiCatalogoJogos.Entities;
+﻿using ApiCatalagoJogos.Exceptions;
+using ApiCatalogoJogos.Entities;
+using ApiCatalogoJogos.Exceptions;
 using ApiCatalogoJogos.InputModel;
 using ApiCatalogoJogos.Repositories;
 using ApiCatalogoJogos.ViewModel;
@@ -21,11 +23,11 @@ namespace ApiCatalogoJogos.Services
         
         public async Task<List<JogoViewModel>> Obter(int pagina, int quantidade)
         {
-            var jogos = _jogoRepository.Obter(pagina, quantidade);
+            var jogos = await _jogoRepository.Obter(pagina, quantidade);
 
             return jogos.Select(jogo => new JogoViewModel
             {
-                Id = jogo.id,
+                id = jogo.id,
                 Nome = jogo.Nome,
                 Preco = jogo.Preco,
                 Produtora = jogo.Produtora
