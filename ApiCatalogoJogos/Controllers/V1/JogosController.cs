@@ -67,7 +67,15 @@ namespace ApiCatalogoJogos.Controllers.V1
             return Ok(jogo);
         }
 
-
+        /// <summary>
+        /// Inserir um novo jogo
+        /// </summary>
+        /// <remarks>
+        /// Não é possível criar o jogo
+        /// </remarks>
+        /// <response code="200">Sucesso ao inserir</response>
+        /// <response code="204">Error ao inserir um novo jogo</response>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
@@ -84,6 +92,15 @@ namespace ApiCatalogoJogos.Controllers.V1
 
         }
 
+        /// <summary>
+        /// Atualizar um jogo por id
+        /// </summary>
+        /// <remarks>
+        /// Não é possível atualizar o jogo
+        /// </remarks>
+        /// <response code="200">Sucesso ao atualizar</response>
+        /// <response code="404">Não existe esse jogo!</response>
+        /// <returns></returns>
         [HttpPut("{idJogo:guid}")]
         public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogoInputModel)
         {
@@ -100,6 +117,15 @@ namespace ApiCatalogoJogos.Controllers.V1
 
         }
 
+        /// <summary>
+        /// Atualizar um atributo do jogo (preço)
+        /// </summary>
+        /// <remarks>
+        /// Não é possível atualizar o preço do jogo
+        /// </remarks>
+        /// <response code="200">Sucesso ao atualizar</response>
+        /// <response code="404">Não existe esse jogo!</response>
+        /// <returns></returns>
         [HttpPatch("{idJogo:guid}/preco/{preco:double}")]
         public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
         {
@@ -115,6 +141,15 @@ namespace ApiCatalogoJogos.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Deletar um jogo por id
+        /// </summary>
+        /// <remarks>
+        /// Não é possível deletar o jogo
+        /// </remarks>
+        /// <response code="200">Sucesso ao deletar</response>
+        /// <response code="404">Não existe esse jogo!</response>
+        /// <returns></returns>
         [HttpDelete("{idJogo:guid}")]
         public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
         {

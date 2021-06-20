@@ -29,5 +29,49 @@
             <response code="204">Caso não haja jogo com esse id</response>
             <returns></returns>
         </member>
+        <member name="M:ApiCatalogoJogos.Controllers.V1.JogosController.InserirJogo(ApiCatalogoJogos.InputModel.JogoInputModel)">
+            <summary>
+            Inserir um novo jogo
+            </summary>
+            <remarks>
+            Não é possível criar o jogo
+            </remarks>
+            <response code="200">Sucesso ao inserir</response>
+            <response code="204">Error ao inserir um novo jogo</response>
+            <returns></returns>
+        </member>
+        <member name="M:ApiCatalogoJogos.Controllers.V1.JogosController.AtualizarJogo(System.Guid,ApiCatalogoJogos.InputModel.JogoInputModel)">
+            <summary>
+            Atualizar um jogo por id
+            </summary>
+            <remarks>
+            Não é possível atualizar o jogo
+            </remarks>
+            <response code="200">Sucesso ao atualizar</response>
+            <response code="404">Não existe esse jogo!</response>
+            <returns></returns>
+        </member>
+        <member name="M:ApiCatalogoJogos.Controllers.V1.JogosController.AtualizarJogo(System.Guid,System.Double)">
+            <summary>
+            Atualizar um atributo do jogo (preço)
+            </summary>
+            <remarks>
+            Não é possível atualizar o preço do jogo
+            </remarks>
+            <response code="200">Sucesso ao atualizar</response>
+            <response code="404">Não existe esse jogo!</response>
+            <returns></returns>
+        </member>
+        <member name="M:ApiCatalogoJogos.Controllers.V1.JogosController.DeletarJogo(System.Guid)">
+            <summary>
+            Deletar um jogo por id
+            </summary>
+            <remarks>
+            Não é possível deletar o jogo
+            </remarks>
+            <response code="200">Sucesso ao deletar</response>
+            <response code="404">Não existe esse jogo!</response>
+            <returns></returns>
+        </member>
     </members>
 </doc>

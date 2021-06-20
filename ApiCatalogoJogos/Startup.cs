@@ -31,8 +31,8 @@ namespace ApiCatalogoJogos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped <IJogoService, JogoService>();
-            services.AddScoped <IJogoRepository, JogoSqlServerRepository>();
+            services.AddScoped<IJogoService, JogoService>();
+            services.AddScoped<IJogoRepository, JogoSqlServerRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,20 +54,21 @@ namespace ApiCatalogoJogos
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiCatalogoJogos v1"));
-            
 
-            app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseHttpsRedirection();
+                app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseRouting();
+                app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+                app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+            }
         }
     }
 }
