@@ -24,7 +24,18 @@ namespace ApiCatalogoJogos.Controllers.V1
             _jogoService = jogoService;
         }
 
-       [HttpGet]
+        /// <summary>
+        /// Buscar todos os jogos de forma paginada
+        /// </summary>
+        /// <remarks>
+        /// Não é possível buscar os jogos
+        /// </remarks>
+        /// <param name="pagina">Indica qual pagina esta sendo consultada [minimo 1]</param>
+        /// <param name="quantidade">Indica a quantidade de registros por página. [mínimo 1 máximo 50]</param>
+        /// <response code="200">Retorna lista de jogos</response>
+        /// <response code="204">Caso não haja jogos</response>
+        /// <returns></returns>
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<JogoViewModel>>> Obter ([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1, 50)] int quantidade = 5)
         {
             var jogos = await _jogoService.Obter(pagina, quantidade);
@@ -35,7 +46,16 @@ namespace ApiCatalogoJogos.Controllers.V1
             return Ok(jogos);
         }
 
-
+        /// <summary>
+        /// Buscar um jogo por id
+        /// </summary>
+        /// <remarks>
+        /// Não é possível buscar os jogos
+        /// </remarks>
+        /// <param name="idJogo">Indica qual pagina esta sendo consultada [minimo 1]</param>
+        /// <response code="200">Retorna o jogo</response>
+        /// <response code="204">Caso não haja jogo com esse id</response>
+        /// <returns></returns>
         [HttpGet("{idJogo:guid}")]
         public async Task<ActionResult<JogoViewModel>> Obter([FromRoute] Guid idJogo)
         {
@@ -53,7 +73,7 @@ namespace ApiCatalogoJogos.Controllers.V1
         {
             try
             {
-                var jogo = _jogoService.Inserir(jogoInputModel);
+                var jogo = await _jogoService.Inserir(jogoInputModel);
 
                 return Ok(jogo);
             }
